@@ -1,8 +1,17 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Phone, Mail, Copy, Check, Calendar, Award, Target } from 'lucide-react';
-import SectionHeader from '../components/SectionHeader';
-import brandingImg from '../assets/portfolio_social.png';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Copy,
+  Check,
+  Calendar,
+  Award,
+  Target,
+} from "lucide-react";
+import SectionHeader from "../components/SectionHeader";
+import brandingImg from "../assets/portfolio_social.webp";
 
 const InstagramIcon = (props) => (
   <svg
@@ -23,67 +32,67 @@ const InstagramIcon = (props) => (
 );
 
 const About = () => {
-  const [copiedText, setCopiedText] = useState('');
+  const [copiedText, setCopiedText] = useState("");
 
   const copyToClipboard = (text, label) => {
     navigator.clipboard.writeText(text);
     setCopiedText(label);
-    setTimeout(() => setCopiedText(''), 2000);
+    setTimeout(() => setCopiedText(""), 2000);
   };
 
   const details = [
-    { 
-      icon: MapPin, 
-      label: 'Location', 
-      value: 'Bhubaneswar, Odisha', 
-      copyValue: 'Bhubaneswar, Odisha',
-      color: 'text-brand-purple'
+    {
+      icon: MapPin,
+      label: "Location",
+      value: "Bhubaneswar, Odisha",
+      copyValue: "Bhubaneswar, Odisha",
+      color: "text-brand-purple",
     },
-    { 
-      icon: Phone, 
-      label: 'Phone', 
-      value: '+91 79785 28177', 
-      copyValue: '7978528177',
-      color: 'text-brand-cyan'
+    {
+      icon: Phone,
+      label: "Phone",
+      value: "+91 79785 28177",
+      copyValue: "7978528177",
+      color: "text-brand-cyan",
     },
-    { 
-      icon: Phone, 
-      label: 'Alternate Phone', 
-      value: '+91 90404 36548', 
-      copyValue: '9040436548',
-      color: 'text-brand-cyan'
+    {
+      icon: Phone,
+      label: "Alternate Phone",
+      value: "+91 90404 36548",
+      copyValue: "9040436548",
+      color: "text-brand-cyan",
     },
-    { 
-      icon: Mail, 
-      label: 'Email', 
-      value: 'rajeshbhuiya@gmail.com', 
-      copyValue: 'rajeshbhuiya@gmail.com',
-      color: 'text-brand-gold'
+    {
+      icon: Mail,
+      label: "Email",
+      value: "rajeshbhuiya@gmail.com",
+      copyValue: "rajeshbhuiya@gmail.com",
+      color: "text-brand-gold",
     },
-    { 
-      icon: InstagramIcon, 
-      label: 'Instagram', 
-      value: '@swift_rajesh', 
-      copyValue: 'swift_rajesh',
-      color: 'text-pink-500'
+    {
+      icon: InstagramIcon,
+      label: "Instagram",
+      value: "@swift_rajesh",
+      copyValue: "swift_rajesh",
+      color: "text-pink-500",
     },
   ];
 
   return (
-    <section 
-      id="about" 
+    <section
+      id="about"
       className="py-24 px-4 md:px-8 max-w-7xl mx-auto relative select-none"
     >
-      <SectionHeader 
-        number="01" 
-        title="About My Creative Journey" 
-        subtitle="Who is Rajesh Bhuiya" 
+      <SectionHeader
+        number="01"
+        title="About My Creative Journey"
+        subtitle="Who is Rajesh Bhuiya"
         gradientTitle
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         {/* Left Side: Creative Image Collage */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -92,9 +101,9 @@ const About = () => {
         >
           <div className="relative group rounded-3xl overflow-hidden aspect-[4/5] glass-card border border-white/5 p-2">
             <div className="w-full h-full rounded-2xl overflow-hidden relative">
-              <img 
-                src={brandingImg} 
-                alt="Rajesh Bhuiya Graphic Workspace" 
+              <img
+                src={brandingImg}
+                alt="Rajesh Bhuiya Graphic Workspace"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
               {/* Artistic Grid overlay */}
@@ -107,15 +116,19 @@ const About = () => {
                 <Award size={20} className="animate-pulse" />
               </div>
               <div>
-                <p className="font-display font-bold text-white text-sm leading-none">7+ Years</p>
-                <p className="text-[10px] text-text-muted mt-0.5 font-semibold">Of Excellence</p>
+                <p className="font-display font-bold text-white text-sm leading-none">
+                  7+ Years
+                </p>
+                <p className="text-[10px] text-text-muted mt-0.5 font-semibold">
+                  Of Excellence
+                </p>
               </div>
             </div>
           </div>
         </motion.div>
 
         {/* Right Side: Narrative and details Grid */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -128,10 +141,20 @@ const About = () => {
               Crafting visual narratives that connect and convert.
             </h3>
             <p className="text-text-muted leading-relaxed text-base md:text-lg">
-              Hello! I am <strong className="text-white">Rajesh Bhuiya</strong>, a passionate Graphic Designer and Video Editor based in Bhubaneswar, Odisha. I specialize in branding, social media creatives, print media, motion graphics, and marketing visuals.
+              Hello! I am <strong className="text-white">Rajesh Bhuiya</strong>,
+              a passionate Graphic Designer and Video Editor based in
+              Bhubaneswar, Odisha. I specialize in branding, social media
+              creatives, print media, motion graphics, and marketing visuals.
             </p>
             <p className="text-text-muted leading-relaxed text-base">
-              With more than <strong className="text-white">7 years of industry experience</strong>, I help brands and organizations create impactful visual communication, beautiful packaging aesthetics, and premium video editing. My goal is to combine design fundamentals with modern digital trends to bring ideas to life.
+              With more than{" "}
+              <strong className="text-white">
+                7 years of industry experience
+              </strong>
+              , I help brands and organizations create impactful visual
+              communication, beautiful packaging aesthetics, and premium video
+              editing. My goal is to combine design fundamentals with modern
+              digital trends to bring ideas to life.
             </p>
           </div>
 
@@ -142,19 +165,25 @@ const About = () => {
               const isCopied = copiedText === item.label;
 
               return (
-                <div 
+                <div
                   key={idx}
                   onClick={() => copyToClipboard(item.copyValue, item.label)}
                   className="group flex items-center justify-between p-4 rounded-2xl glass-card-interactive border border-white/5 cursor-pointer"
                   data-hover
                 >
                   <div className="flex items-center gap-3.5">
-                    <div className={`p-2.5 rounded-xl bg-white/[0.03] ${item.color} group-hover:scale-110 transition-transform duration-300`}>
+                    <div
+                      className={`p-2.5 rounded-xl bg-white/[0.03] ${item.color} group-hover:scale-110 transition-transform duration-300`}
+                    >
                       <Icon size={18} />
                     </div>
                     <div className="text-left">
-                      <p className="text-[10px] font-bold text-text-muted uppercase tracking-wider">{item.label}</p>
-                      <p className="text-sm font-semibold text-white mt-0.5 line-clamp-1">{item.value}</p>
+                      <p className="text-[10px] font-bold text-text-muted uppercase tracking-wider">
+                        {item.label}
+                      </p>
+                      <p className="text-sm font-semibold text-white mt-0.5 line-clamp-1">
+                        {item.value}
+                      </p>
                     </div>
                   </div>
 
@@ -177,7 +206,10 @@ const About = () => {
                           initial={{ opacity: 0.4 }}
                           whileHover={{ opacity: 1 }}
                         >
-                          <Copy size={14} className="opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                          <Copy
+                            size={14}
+                            className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          />
                         </motion.span>
                       )}
                     </AnimatePresence>
@@ -186,7 +218,6 @@ const About = () => {
               );
             })}
           </div>
-
         </motion.div>
       </div>
     </section>
