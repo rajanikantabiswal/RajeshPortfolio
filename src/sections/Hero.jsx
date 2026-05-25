@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import Button from "../components/Button";
 import profileImg from "../assets/hero.webp";
+import portfolioPdf from "../assets/docs/RajeshBhuiyaPortfolio.pdf";
+import resumePdf from "../assets/docs/RajeshBhuiyaResume.pdf";
 
 const Hero = () => {
   // Stagger animation container
@@ -95,7 +97,8 @@ const Hero = () => {
           >
             <Button
               variant="primary"
-              onClick={() => handleScroll("portfolio")}
+              href={portfolioPdf}
+              download
               icon={ArrowRight}
             >
               View Portfolio
@@ -103,7 +106,7 @@ const Hero = () => {
             <Button variant="secondary" onClick={() => handleScroll("contact")}>
               Hire Me
             </Button>
-            <Button variant="glass" href="#" download icon={Download}>
+            <Button variant="glass" href={resumePdf} download icon={Download}>
               Resume
             </Button>
           </motion.div>

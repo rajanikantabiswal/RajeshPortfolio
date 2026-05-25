@@ -206,7 +206,7 @@ const Portfolio = () => {
       />
 
       {/* Horizontal Category Navigation Bar */}
-      <div className="flex justify-start md:justify-center items-center overflow-x-auto pb-6 mb-12 gap-3 no-scrollbar scroll-smooth">
+      <div className="flex justify-start md:justify-center items-center flex-wrap pb-6 mb-12 gap-3 no-scrollbar scroll-smooth">
         {categories.map((cat, idx) => (
           <button
             key={idx}
