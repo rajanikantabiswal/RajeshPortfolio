@@ -16,10 +16,12 @@ import Services from "./sections/Services";
 import Testimonials from "./sections/Testimonials";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
+import ProjectDetails from "./sections/ProjectDetails";
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeProjectId, setActiveProjectId] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,6 +36,35 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash.startsWith("#project-")) {
+        const id = parseInt(hash.replace("#project-", ""), 10);
+        setActiveProjectId(id);
+        window.scrollTo({ top: 0, behavior: "instant" });
+      } else {
+        setActiveProjectId(null);
+        if (hash.startsWith("#")) {
+          const sectionId = hash.slice(1);
+          if (sectionId) {
+            setTimeout(() => {
+              const element = document.getElementById(sectionId);
+              if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+              }
+            }, 100);
+          }
+        }
+      }
+    };
+
+    handleHashChange();
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   const navItems = [
     { label: "About", id: "about" },
     { label: "Skills", id: "skills" },
@@ -46,9 +77,13 @@ function App() {
 
   const handleScrollToSection = (id) => {
     setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    if (activeProjectId) {
+      window.location.hash = `#${id}`;
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
@@ -178,14 +213,20 @@ function App() {
 
       {/* 4. Section Orchestration Layout */}
       <main className="relative pt-12">
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Portfolio />
-        <Services />
-        <Testimonials />
-        <Contact />
+        {activeProjectId ? (
+          <ProjectDetails projectId={activeProjectId} />
+        ) : (
+          <>
+            <Hero />
+            <About />
+            <Skills />
+            <Experience />
+            <Portfolio />
+            <Services />
+            <Testimonials />
+            <Contact />
+          </>
+        )}
       </main>
 
       {/* 5. Clean Footer layout */}
