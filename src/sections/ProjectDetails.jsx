@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
-  Calendar,
-  User,
-  ExternalLink,
   ChevronLeft,
   ChevronRight,
   X,
-  Send,
-  Briefcase,
-  Layers,
-  CheckCircle2,
 } from "lucide-react";
 import { projects } from "../data/projects";
 
@@ -26,15 +19,6 @@ const ProjectDetails = ({ projectId }) => {
   // Next project logic (looping back to 1)
   const nextProjectIndex = projects.findIndex((p) => p.id === projectId);
   const nextProject = projects[(nextProjectIndex + 1) % totalProjects];
-
-  const handleOpenWhatsApp = () => {
-    const phoneNumber = "917978528177"; // country code without +
-    const message = encodeURIComponent(
-      `Hi Rajesh, I just saw your project "${project.title}" on your portfolio and I would love to discuss a similar project with you!`
-    );
-    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
-    window.open(whatsappURL, "_blank");
-  };
 
   const handleNextLightbox = (e) => {
     e.stopPropagation();
@@ -89,177 +73,53 @@ const ProjectDetails = ({ projectId }) => {
         </div>
       </motion.div>
 
-      {/* 3. Main Detail Columns layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start">
-        
-        {/* Left Column: Vertical Image List Gallery */}
-        <motion.div
-          initial="hidden"
-          animate="show"
-          variants={{
-            hidden: { opacity: 0 },
-            show: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.15,
-              },
-            },
-          }}
-          className="lg:col-span-7 space-y-8"
-        >
-          <div className="text-left space-y-2">
+     
+
+      {/* Creative Gallery Full-Width Masonry Section */}
+      <div className="space-y-8 text-left">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
             <h3 className="text-xs font-black tracking-widest text-brand-cyan uppercase">
               Creative Gallery
             </h3>
-            <p className="text-xs text-text-muted">
+            <p className="text-xs text-text-muted mt-1">
               Click any image to enlarge and explore pixel-perfect details.
             </p>
           </div>
+          {project.gallery && (
+            <span className="self-start sm:self-auto text-[10px] font-black tracking-widest text-brand-purple uppercase bg-brand-purple/10 px-3 py-1.5 rounded-full border border-brand-purple/20">
+              {project.gallery.length} Showcase Items
+            </span>
+          )}
+        </div>
 
-          <div className="space-y-6">
-            {project.gallery && project.gallery.map((imgUrl, index) => (
-              <motion.div
-                key={index}
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-                }}
-                className="group relative rounded-2xl overflow-hidden glass-card border border-white/5 cursor-zoom-in"
-                onClick={() => setLightboxImageIndex(index)}
-              >
-                <img
-                  src={imgUrl}
-                  alt={`${project.title} Screenshot ${index + 1}`}
-                  className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-105"
-                  loading="lazy"
-                />
-                {/* Glowing Overlay on Hover */}
-                <div className="absolute inset-0 bg-brand-purple/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                <div className="absolute inset-0 border border-brand-purple/0 group-hover:border-brand-purple/30 rounded-2xl transition-all duration-300 pointer-events-none" />
-                
-                {/* Micro Action Hover badge */}
-                <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[10px] font-bold tracking-wider text-white">
-                  Enlarge Design
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Right Column: Sticky Metadata Sidebar Panel */}
-        <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="glass-card rounded-3xl p-6 md:p-8 space-y-6 text-left shadow-2xl border border-white/10 relative overflow-hidden"
-          >
-            {/* Ambient Background Glowing Orb */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-brand-purple/5 rounded-full blur-3xl pointer-events-none" />
-
-            <div>
-              <span className="text-[10px] font-bold tracking-widest text-brand-cyan uppercase">
-                Project Overview
-              </span>
-              <h2 className="font-display font-black text-2xl text-white mt-1">
-                Concept & Strategy
-              </h2>
-            </div>
-
-            <p className="text-sm text-text-muted leading-relaxed font-normal">
-              {project.description}
-            </p>
-
-            {/* Project Specs Table */}
-            <div className="border-t border-b border-white/5 py-5 space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-xl bg-brand-purple/10 flex items-center justify-center border border-brand-purple/20 text-brand-purple">
-                  <User size={14} />
-                </div>
-                <div>
-                  <p className="text-[9px] text-text-muted font-black uppercase tracking-wider">
-                    Client & Brand
-                  </p>
-                  <p className="text-xs font-semibold text-white/95 mt-0.5">
-                    {project.client}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-xl bg-brand-cyan/10 flex items-center justify-center border border-brand-cyan/20 text-brand-cyan">
-                  <Calendar size={14} />
-                </div>
-                <div>
-                  <p className="text-[9px] text-text-muted font-black uppercase tracking-wider">
-                    Timeline Year
-                  </p>
-                  <p className="text-xs font-semibold text-white/95 mt-0.5">
-                    {project.year}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-xl bg-brand-purple/10 flex items-center justify-center border border-brand-purple/20 text-brand-purple">
-                  <Briefcase size={14} />
-                </div>
-                <div>
-                  <p className="text-[9px] text-text-muted font-black uppercase tracking-wider">
-                    Services / Discipline
-                  </p>
-                  <p className="text-xs font-semibold text-white/95 mt-0.5">
-                    {project.category}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Deliverables Section */}
-            {project.deliverables && (
-              <div className="space-y-3">
-                <h4 className="text-[10px] text-text-muted font-black uppercase tracking-widest flex items-center gap-1.5">
-                  <Layers size={11} className="text-brand-purple" />
-                  Key Deliverables
-                </h4>
-                <div className="grid grid-cols-1 gap-2">
-                  {project.deliverables.map((item, idx) => (
-                    <div key={idx} className="flex items-start gap-2 text-xs text-white/80">
-                      <CheckCircle2 size={13} className="text-brand-cyan mt-0.5 shrink-0" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Software employed */}
-            <div className="space-y-2.5">
-              <h4 className="text-[10px] text-text-muted font-black uppercase tracking-widest">
-                Software Employed
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {project.tools.map((tool, idx) => (
-                  <span
-                    key={idx}
-                    className="text-xs bg-white/5 text-white/90 border border-white/5 px-3.5 py-1.5 rounded-full font-semibold"
-                  >
-                    {tool}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Dynamic CTA button */}
-            <button
-              onClick={handleOpenWhatsApp}
-              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl font-display font-bold text-xs tracking-wider uppercase bg-gradient-to-r from-brand-purple to-brand-cyan text-white shadow-lg shadow-brand-purple/15 hover:shadow-brand-purple/25 border border-white/10 hover:border-white/20 transition-all cursor-pointer"
-              data-hover
+        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 [column-fill:_balance]">
+          {project.gallery && project.gallery.map((imgUrl, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
+              className="group relative rounded-2xl overflow-hidden glass-card border border-white/5 cursor-zoom-in break-inside-avoid mb-6"
+              onClick={() => setLightboxImageIndex(index)}
             >
-              <Send size={12} />
-              <span>Discuss Similar Project</span>
-            </button>
-          </motion.div>
+              <img
+                src={imgUrl}
+                alt={`${project.title} Screenshot ${index + 1}`}
+                className="w-full h-auto block transition-transform duration-700 ease-out group-hover:scale-105"
+                loading="lazy"
+              />
+              {/* Glowing Overlay on Hover */}
+              <div className="absolute inset-0 bg-brand-purple/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute inset-0 border border-brand-purple/0 group-hover:border-brand-purple/30 rounded-2xl transition-all duration-300 pointer-events-none" />
+              
+              {/* Micro Action Hover badge */}
+              <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md border border-white/10 px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-[10px] font-bold tracking-wider text-white">
+                Enlarge Design
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
 
