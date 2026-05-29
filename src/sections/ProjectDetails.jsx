@@ -93,7 +93,7 @@ const ProjectDetails = ({ projectId }) => {
           )}
         </div>
 
-        <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 [column-fill:_balance]">
+        <div className="columns-2 sm:columns-2 md:columns-3 lg:columns-4 gap-6 [column-fill:_balance]">
           {project.gallery && project.gallery.map((imgUrl, index) => (
             <motion.div
               key={index}
